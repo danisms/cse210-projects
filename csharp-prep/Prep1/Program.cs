@@ -9,15 +9,15 @@ class Program
 
         // Get user first name
         Console.Write("What is your first name? ");
-        string first_name = Console.ReadLine();
+        string firstName = Console.ReadLine();
 
         // Get user last name
         Console.Write("What is your last name? ");
-        string last_name = Console.ReadLine();
+        string lastName = Console.ReadLine();
 
         // Display user first name and last name back to the user
         Console.WriteLine();
-        string display_name = $"Your name is {last_name}, {first_name} {last_name}.";
-        Console.WriteLine(display_name);
+        string displayName = $"Your name is {lastName}, {firstName} {lastName}.";
+        Console.WriteLine(displayName);
     }
 }
