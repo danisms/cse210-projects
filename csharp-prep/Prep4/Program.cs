@@ -16,7 +16,6 @@ class Program
         List<int> userNumbers = new List<int>();
         // create other important variables
         int sumOfNumbers = 0;
-        int largestNum = 0;
 
         // get, verify and add user number to list
         Console.WriteLine("Enter a list of numbers, type 0 when finished.");
@@ -48,8 +47,9 @@ class Program
         // get numbers average
         decimal averageNum = decimal.Divide(sumOfNumbers, userNumbers.Count);
         // get largest number and smallest number
+        int largestNum = userNumbers[0];
         foreach (int num in userNumbers)
-        {   
+        {
             // get largest number
             if (num > largestNum)
             {
@@ -76,8 +76,8 @@ class Program
         // sort list and display the value
         userNumbers.Sort();
         Console.Write("[");
-        for( int i = 0; i < userNumbers.Count; i++)
-        {   
+        for (int i = 0; i < userNumbers.Count; i++)
+        {
             if (i < userNumbers.Count - 1)
             {
                 Console.Write($"{userNumbers[i]}, ");
