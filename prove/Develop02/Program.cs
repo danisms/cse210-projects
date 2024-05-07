@@ -21,10 +21,10 @@ class Program
         int userOpt = 0;
         string promptMsg = "1. Write\n2. Display\n3. Edit\n4. Load\n5. Save\n6. Quit\n";
         // create an instance of a journal class
-        Journal journal = new Journal();
+        Journal journal = new();
 
         //create and load prompt questions into PromptGenerator Class
-        PromptGenerator generatePrompt = new PromptGenerator
+        PromptGenerator generatePrompt = new()
         {
             _prompts = ["What was the most interesting fact you learned today?",
                                 "What inspiration did you receive today?",
@@ -69,7 +69,7 @@ class Program
                 Console.Write(">: ");
                 string userEntry = Console.ReadLine();
                 // store user entry and prompt question
-                Entry singleEntry = new Entry();
+                Entry singleEntry = new();
                 singleEntry._promptText = promptQuestion;
                 singleEntry._entryText = userEntry;
                 // get current date and time

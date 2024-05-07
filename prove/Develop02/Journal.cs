@@ -3,7 +3,7 @@ using System.Net;
 using System.Reflection.Metadata;
 using System.Security;
 
-class Journal
+public class Journal
 {
     // Attributes
     public string _filename;
@@ -25,7 +25,27 @@ class Journal
     }
     public void SaveToFile(string fileName)
     {
+        // create file if not in existence and write to the file
+        void writeToFile(string filename)
+        {
+            using (StreamWriter entry = new(filename))
+            {
+                foreach (Entry singleEntry in _entries)
+                {
+                    try
+                    {
+                        entry.WriteLine($"{singleEntry._date}~{singleEntry._promptText}~{singleEntry._entryText}");
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine($"Error-Saving: {err}");
+                    }
+                }
+                Console.WriteLine($"{filename} saved successfully!\n");
+            }
+        }
 
+        // modify fileName to proper saving file-name
         fileName = $"{fileName}.{_extension}";
         // check if filename already exist and ask to continue or change the name
         bool fileExit = false;
@@ -70,6 +90,12 @@ class Journal
                     Console.WriteLine($"Error: {err}");
                 }
             }
+        }
+
+        // check if file does not exit and the _filename property is null
+        if (!File.Exists(fileName) && _filename == null)
+        {
+            writeToFile(fileName);
         }
 
         // check if file is not empty and ask to save in current file or new file
@@ -119,25 +145,6 @@ class Journal
                 {
                     Console.WriteLine($"Error: {err}");
                 }
-            }
-        }
-
-        void writeToFile(string fileName)
-        {
-            using (StreamWriter entry = new StreamWriter(fileName))
-            {
-                foreach (Entry singleEntry in _entries)
-                {
-                    try
-                    {
-                        entry.WriteLine($"{singleEntry._date}~{singleEntry._promptText}~{singleEntry._entryText}");
-                    }
-                    catch (Exception err)
-                    {
-                        Console.WriteLine($"Error-Saving: {err}");
-                    }
-                }
-                Console.WriteLine($"{fileName} saved successfully!\n");
             }
         }
     }
