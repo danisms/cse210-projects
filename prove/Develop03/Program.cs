@@ -3,6 +3,13 @@ using System.IO;
 using System.Linq.Expressions;
 using System.Reflection.Metadata;
 
+/* 
+EXCEED REQUIREMENT
+1. Add more functionality to the program that enables the user to choose from the Doctrinal Mastery of the church
+2. I also made it possible for you to add your favorite scripture and use the program to memorize it.
+This and more functionalities I added including an additional class.
+*/
+
 class Program
 {
     static void Main(string[] args)
