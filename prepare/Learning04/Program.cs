@@ -15,7 +15,7 @@ class Program
         Console.WriteLine(student1MathSummary);
         Console.WriteLine(student1MathAssList);
         // check writing assignment class
-        WritingAssignment student1Writing = new WritingAssignment("Daniel", "Demogracy", "The freedom of my country");
+        WritingAssignment student1Writing = new WritingAssignment("Daniel", "Demo", "The freedom of my country");
         Console.WriteLine(student1Writing.GetSummary());
         Console.WriteLine(student1Writing.GetWritingInformation());
     }
