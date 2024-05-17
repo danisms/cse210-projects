@@ -15,7 +15,7 @@ public class FileHandler
    // Constructor
    public FileHandler()
    {
-      _mainDirectory = "../../../scriptures";
+      _mainDirectory = "scriptures";
       LoadDirectories(_mainDirectory);
    }
 
