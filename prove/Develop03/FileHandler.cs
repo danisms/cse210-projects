@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Microsoft.VisualBasic.FileIO;
 
 public class FileHandler
@@ -37,7 +38,7 @@ public class FileHandler
       }
       catch (IndexOutOfRangeException)
       {
-         Console.WriteLine("Invalid Choice: Plese chose from the options available");
+         Console.WriteLine("Invalid Choice: Please chose from the options available");
       }
       catch (Exception error)
       {
@@ -312,19 +313,32 @@ public class FileHandler
    }
    public void DisplayDirectories()
    {
+      // check operating system
+      bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+      // Console.WriteLine($"isWindows: {isWindows}");  // for debugging purpose
       // display all directory in the main directory
       int count = 1;
       foreach (string directory in _directories)
       {
          string[] dirNameParts = directory.Split("../");
          string dirName = dirNameParts[dirNameParts.Length - 1];
-         Console.WriteLine($"{count}: {dirName.Split("\\")[1]}");
+         if (isWindows)
+         {
+            Console.WriteLine($"{count}: {dirName.Split("\\")[1]}");
+         }
+         else {
+            Console.WriteLine($"{count}: {dirName.Split("/")[1]}");
+         }
          count++;
       }
       _fileOrDirCount = count;
    }
    public bool DisplayFiles()
    {
+      // check operating system
+      bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+      // Console.WriteLine($"isWindows: {isWindows}");  // for debugging purpose
+
       // display files and return true if folder is empty else return false
       int count = 1;
       bool isEmpty;
@@ -332,10 +346,20 @@ public class FileHandler
       {
          foreach (string file in _files)
          {
+            // Console.WriteLine(file);  // for debugging purpose
             string[] fileNameMainParts = file.Split("../");
             string fileName = fileNameMainParts[fileNameMainParts.Length - 1];
             // split further to get filename and extension
-            string[] fileNameParts = fileName.Split("\\");
+            string[] fileNameParts;
+            if (isWindows)
+            {
+               fileNameParts = fileName.Split("\\");
+            }
+            else
+            {
+               fileNameParts = fileName.Split("/");
+            }
+            
             fileName = fileNameParts[fileNameParts.Length - 1];
             // splitting further to get just the filename without extension
             fileNameParts = fileName.Split(".");
