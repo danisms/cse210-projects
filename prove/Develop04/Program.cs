@@ -1,5 +1,14 @@
 using System;
 
+/* 
+EXCEED REQUIREMENT:
+I made each question and prompt to appear unique i.e 
+they don't repeat until the entire prompt or question list is exhausted.
+
+Also, I added an extra animation, and created a random function to choice between
+two deferent animations to display.
+*/
+
 class Program
 {
     static void Main(string[] args)
@@ -96,12 +105,12 @@ class Program
                     while (true)
                     {
                         Console.WriteLine();  // for spacing
-                        Console.WriteLine("Please Note: A section should be between 10 seconds and above");
+                        Console.WriteLine("Please Note: A section should be between 15 seconds and above");
                         Console.Write("How long, in seconds, would you like for your session?: ");
                         try
                         {
                             int duration = int.Parse(Console.ReadLine());
-                            if (duration >= 10)
+                            if (duration >= 15)
                             {
                                 // set duration
                                 reflect.SetDuration(duration);
@@ -109,7 +118,7 @@ class Program
                             }
                             else
                             {
-                                Console.WriteLine("A section cannot be less than 10 seconds.");
+                                Console.WriteLine("A section cannot be less than 15 seconds.");
                             }
                         }
                         catch (FormatException)
@@ -128,6 +137,57 @@ class Program
                 else if (userChoice == 3)
                 {
                     // Enter Listing Activity
+                    // clear console
+                    Console.Clear();
+                    // Enter Breathing Activity
+                    string description = "This activity will help you reflect on the good things in your life\nby having you list as many things as you can in a certain area.";
+
+                    List<string> prompts = new List<string>();
+                    prompts = [
+                        "Who are people that you appreciate?",
+                        "What are personal strengths of yours?",
+                        "Who are people that you have helped this week?",
+                        "When have you felt the Holy Ghost this month?",
+                        "Who are some of your personal heroes?"
+                    ];
+
+                    ListingActivity listing = new ListingActivity("Listing", description, prompts);
+
+                    // Display stating message
+                    listing.DisplayStatingMessage();
+
+                    // get and set activity duration
+                    while (true)
+                    {
+                        Console.WriteLine();  // for spacing
+                        Console.WriteLine("Please Note: A section should be between 20 seconds and above");
+                        Console.Write("How long, in seconds, would you like for your session?: ");
+                        try
+                        {
+                            int duration = int.Parse(Console.ReadLine());
+                            if (duration >= 20)
+                            {
+                                // set duration
+                                listing.SetDuration(duration);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("A section cannot be less than 20 seconds.");
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid Entry: Numbers only.");
+                        }
+                        catch (Exception error)
+                        {
+                            Console.WriteLine(error);
+                        }
+                    }
+
+                    // run breathing activity
+                    listing.Run();
                 }
                 else if (userChoice == 4)
                 {

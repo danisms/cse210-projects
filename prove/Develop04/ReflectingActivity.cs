@@ -1,10 +1,10 @@
 public class ReflectingActivity : Activity
 {
-    private List<string> _prompts;
-    private List<string> _questions;
+    private List<string> _prompts = new List<string>();
+    private List<string> _questions = new List<string>();
 
-    private List<string> _selectedPrompts;
-    private List<string> _selectedQuestions;
+    private List<string> _selectedPrompts = new List<string>();
+    private List<string> _selectedQuestions = new List<string>();
 
     private string _currentPrompt;
     private string _currentQuestion;
@@ -46,7 +46,7 @@ public class ReflectingActivity : Activity
             Console.Write("> ");
             GetRandomQuestion();
             DisplayQuestion();
-            ShowCountDown(10);
+            ShowSpinner(15);
             Console.WriteLine(); // for spacing purpose;
         }
         // display end message
@@ -67,6 +67,7 @@ public class ReflectingActivity : Activity
                 int genRandomNum = randomNum.Next(0, _prompts.Count);
                 // Console.WriteLine($"Gen-Num: {genRandomNum}");  // for testing purpose
                 // use the random number to pick a value from the list
+                // Console.WriteLine(_prompts[0]);  // for testing purpose
                 _currentPrompt = _prompts[genRandomNum];
                 // Console.WriteLine(_currentPrompt);  // for testing purpose
                 // check if current prompt exit in _selectedPrompts

@@ -26,7 +26,7 @@ public class Activity
     public int randomTiming()
     {
         Random timing = new Random();
-        return timing.Next(3, 7);
+        return timing.Next(3, 8);
     }
 
     public void DisplayStatingMessage()
@@ -42,11 +42,11 @@ public class Activity
         Console.WriteLine();  // for spacing purpose
         if (_duration < 1)
         {
-            Console.WriteLine($"You have completed another {_duration} second of the Breathing Activity");
+            Console.WriteLine($"You have completed another {_duration} second of the {_name} Activity");
         }
         else
         {
-            Console.WriteLine($"You have completed another {_duration} seconds of the Breathing Activity");
+            Console.WriteLine($"You have completed another {_duration} seconds of the {_name} Activity");
         }
     }
 
@@ -116,7 +116,7 @@ public class Activity
         {
             Console.Write(count);
             Thread.Sleep(speed);
-            Console.Write("\b \b");  // for erasing the + character
+            Console.Write("\b \b");
             timeInMs -= speed;
             count -= 1;
         }
