@@ -7,8 +7,6 @@ public class BreathingActivity : Activity
 
     public void Run()
     {
-        DateTime startTime = DateTime.Now;
-        DateTime endTime = startTime.AddSeconds(GetDuration());
         List<int> breathTiming = new List<int>();
         breathTiming.Add(3);
         breathTiming.Add(4);
@@ -29,6 +27,8 @@ public class BreathingActivity : Activity
         base.ChooseRandomAnimation(getRandomTiming());
         Console.WriteLine();  // for spacing purpose
         // check timing
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(GetDuration());
         while (DateTime.Now < endTime)
         {
             Console.WriteLine();  // for spacing purpose;
