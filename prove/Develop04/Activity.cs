@@ -6,11 +6,27 @@ public class Activity
     private string _description;
     private int _duration;
 
-    public Activity(string name, string description, int duration)
+    public Activity(string name, string description)
     {
         _name = name;
         _description = description;
+    }
+
+    public void SetDuration(int duration)
+    {
+        // from parent
         _duration = duration;
+    }
+
+    public int GetDuration()
+    {
+        return _duration;
+    }
+
+    public int randomTiming()
+    {
+        Random timing = new Random();
+        return timing.Next(3, 7);
     }
 
     public void DisplayStatingMessage()
@@ -21,8 +37,10 @@ public class Activity
 
     public void DisplayEndingMessage()
     {
-        Console.WriteLine("Well done!\n");
-        if (_duration > 1)
+        Console.WriteLine("\nWell Done!\n");
+        ShowSpinner(randomTiming());
+        Console.WriteLine();  // for spacing purpose
+        if (_duration < 1)
         {
             Console.WriteLine($"You have completed another {_duration} second of the Breathing Activity");
         }
@@ -36,13 +54,56 @@ public class Activity
     {
         int timeInMs = seconds * 1000;
         int speed = 500;
+        string[] animation = ["-", "\\", "|", "/", "-", "\\", "|", "/"];
         while (timeInMs > 0)
         {
-            Console.Write('+');
-            Thread.Sleep(speed);
-            Console.Write("\b \b");  // for erasing the + character
-            Console.Write("-");  // for replacing the the position of the + character with a minus (-) character
-            timeInMs -= speed;            
+            foreach (string move in animation)
+            {
+                Console.Write(move);
+                Thread.Sleep(speed);
+                Console.Write("\b \b");
+                timeInMs -= speed;
+            }
+        }
+    }
+
+    public void ShowLoading(int seconds)
+    {
+        int timeInMs = seconds * 1000;
+        int speed = 500;
+        string[] animation = ["L", "O", "A", "D", "I", "N", "G"];
+        while (timeInMs > 0)
+        {
+            foreach (string move in animation)
+            {
+                Console.Write(move);
+                Thread.Sleep(speed);
+                Console.Write("\b \b");
+                timeInMs -= speed;
+            }
+            foreach (string latter in animation)
+            {
+                Console.Write(latter);
+                Thread.Sleep(150);
+            }
+            Console.Write(" ");
+        }
+    }
+
+    public void ChooseRandomAnimation(int timing)
+    {
+        int getRandomBool()
+        {
+            Random getZeroOrOne = new Random();
+            return getZeroOrOne.Next(0, 2);
+        }
+        if (getRandomBool() == 0)
+        {
+            ShowSpinner(timing);
+        }
+        else
+        {
+            ShowLoading(timing);
         }
     }
 
@@ -57,7 +118,7 @@ public class Activity
             Thread.Sleep(speed);
             Console.Write("\b \b");  // for erasing the + character
             timeInMs -= speed;
-            Console.Write(count);  // for replacing the the position of the + character with a minus (-) character           
+            count -= 1;
         }
     }
 }

@@ -3,7 +3,7 @@ public class ListingActivity : Activity
     private int _count;
     private List<string> _prompts = new List<string>();
     
-    public ListingActivity(string name, string description, int duration, int count, List<string> prompts) : base(name, description, duration)
+    public ListingActivity(string name, string description, int count, List<string> prompts) : base(name, description)
     {
         _count = count;
         _prompts = prompts;
