@@ -1,0 +1,38 @@
+{
+	"goals" : [
+		{
+			"name":"complete assignment",
+			"type":"simple",
+			"description":"complete eternal quest activity",
+			"point":20,
+			"isComplete":true, 
+			"reward":			{
+				"name":"complete assignment",
+				"type":"reward",
+				"description":"get a cool drink to relax",
+				"point":0,
+				"isEarned":true,
+				"isComplete":false
+			}
+		},
+	],
+	"pointReward" : [
+		{
+			"name":"go fishing",
+			"type":"pointReward",
+			"description":"go on a fishing vacation",
+			"point":20,
+			"isEarned":true,
+			"isComplete":true
+		},
+		{
+			"name":"play video game",
+			"type":"pointReward",
+			"description":"play a new game for 3 hours",
+			"point":200,
+			"isEarned":true,
+			"isComplete":false
+		}
+	],
+	"score" : 360
+}

@@ -1,0 +1,29 @@
+{
+	"goals" : [
+		{
+			"name":"complete assignment",
+			"type":"simple",
+			"description":"complete my week 5 assignment",
+			"point":20,
+			"isComplete":true
+		},
+		{
+			"name":"code daily",
+			"type":"eternal",
+			"description":"code at least 30 minutes everyday.",
+			"point":20,
+			"isComplete":false
+		},
+		{
+			"name":"bring to church",
+			"type":"checklist",
+			"description":"take a recent convert to church on sunday",
+			"point":15,
+			"isComplete":true,
+			"target":4,
+			"amountCompleted":4,
+			"bonus":400
+		}
+	],
+	"score" : 20
+}

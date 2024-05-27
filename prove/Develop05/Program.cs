@@ -1,9 +1,11 @@
-using System;
-
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop05 World!");
+        Console.WriteLine("\t--- *Welcome To Eternal Quest!* ---");
+        // create goal Manager object
+        GoalManager eternalQuest = new GoalManager();
+        // start goal manager
+        eternalQuest.Start();
     }
 }

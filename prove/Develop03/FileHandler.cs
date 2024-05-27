@@ -68,7 +68,7 @@ public class FileHandler
       }
       catch (IndexOutOfRangeException)
       {
-         Console.WriteLine("Invalid Choice: Plese choose from the options available");
+         Console.WriteLine("Invalid Choice: Please choose from the options available");
       }
       catch (Exception error)
       {

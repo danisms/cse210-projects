@@ -11,7 +11,7 @@ class Program
         shapes.Add(new Rectangle("blue", 10, 15));
         shapes.Add(new Circle("yellow", 15));
 
-        foreach(Shape shape in shapes)
+        foreach (Shape shape in shapes)
         {
             // get color and area of the shape
             string color = shape.GetColor();

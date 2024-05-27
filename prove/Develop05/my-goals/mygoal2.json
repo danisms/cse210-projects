@@ -1,0 +1,79 @@
+{
+	"goals" : [
+		{
+			"name":"complete assignment",
+			"type":"simple",
+			"description":"complete eternal quest activity",
+			"point":20,
+			"isComplete":true, 
+			"reward":			{
+				"name":"complete assignment",
+				"type":"reward",
+				"description":"get a cool drink to relax",
+				"point":0,
+				"isEarned":true,
+				"isComplete":false
+			}
+		},
+		{
+			"name":"study BOM",
+			"type":"eternal",
+			"description":"study the Book of Mormon daily",
+			"point":15,
+			"isComplete":false, 
+			"reward":			{
+				"name":"study BOM",
+				"type":"reward",
+				"description":"give yourself a pat the back",
+				"point":0,
+				"isEarned":false,
+				"isComplete":false
+			}
+		},
+		{
+			"name":"go on dates",
+			"type":"checklist",
+			"description":"go on several dates on the month of June",
+			"point":15,
+			"isComplete":false,
+			"target":3,
+			"amountCompleted":0,
+			"bonus":250, 
+			"reward":			{
+				"name":"go on dates",
+				"type":"reward",
+				"description":"have a great jump as a high five to yourself",
+				"point":0,
+				"isEarned":false,
+				"isComplete":false
+			}, 
+			"bonusReward":			{
+				"name":"go on dates",
+				"type":"reward",
+				"description":"watch an awesome movie",
+				"point":0,
+				"isEarned":false,
+				"isComplete":false
+			}
+		}
+	],
+	"pointReward" : [
+		{
+			"name":"go fishing",
+			"type":"pointReward",
+			"description":"go on a fishing vacation",
+			"point":20,
+			"isEarned":true,
+			"isComplete":false
+		},
+		{
+			"name":"play video game",
+			"type":"pointReward",
+			"description":"play a new game for 3 hours",
+			"point":200,
+			"isEarned":true,
+			"isComplete":false
+		}
+	],
+	"score" : 20
+}
