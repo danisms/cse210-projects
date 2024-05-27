@@ -21,7 +21,7 @@
 			"description":"study the Book of Mormon daily",
 			"point":15,
 			"isComplete":false, 
-			"reward":			{
+			"reward":{
 				"name":"study BOM",
 				"type":"reward",
 				"description":"give yourself a pat the back",

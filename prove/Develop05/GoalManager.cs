@@ -21,11 +21,12 @@ public class GoalManager
     // Methods
     public void Start()
     {
-        string menuOptions = "Menu Options:\n  1. Create New Goal\n  2. List Goals\n  3. Save Goals\n  4. Load Goals\n  5. Record Event\n  6. My Reward\n  7. Quit";
         int userChoice = 0;
 
         while (true)
         {
+            string menuOptions = $"Menu Options:\n  1. Create New Goal\n  2. List Goals\n  3. Save Goals\n  4. Load Goals\n  5. Record Event - [{InCompleteEvent()}]\n  6. My Reward- [{TotalInCompleteReward()}]\n  7. Quit";
+
             // record point earned reward if any
             RecordEarnReward();
 
@@ -148,6 +149,19 @@ public class GoalManager
             }
         }
         return _goals.Count();
+    }
+
+    public int InCompleteEvent()
+    {
+        int count = 0;
+        foreach (Goal goal in _goals)
+        {
+            if (!goal.IsComplete())
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     public void ListGoalDetails()
@@ -564,6 +578,12 @@ public class GoalManager
                 Console.WriteLine("_______________________________________\n");
                 isNumber = false;
             }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("\n_______________________________________");
+                Console.WriteLine("Invalid Choice: Please choose from the available options above");
+                Console.WriteLine("_______________________________________\n");
+            }
             catch (Exception error)
             {
                 Console.WriteLine("\n_______________________________________");
@@ -733,29 +753,68 @@ public class GoalManager
                 {
                     if (goal.type == "simple")
                     {
-                        Reward aReward = new Reward(goal.reward.name, goal.reward.description, goal.reward.point, goal.reward.isEarned, goal.reward.isComplete);
-                        SimpleGoal aGoal = new SimpleGoal(goal.name, goal.description, goal.point, goal.isComplete, aReward);
-                        _goals.Add(aGoal);
+                        try
+                        {
+                            Reward aReward = new Reward(goal.reward.name, goal.reward.description, goal.reward.point, goal.reward.isEarned, goal.reward.isComplete);
+                            SimpleGoal aGoal = new SimpleGoal(goal.name, goal.description, goal.point, goal.isComplete, aReward);
+                            _goals.Add(aGoal);
+                        }
+                        catch (System.NullReferenceException)
+                        {
+                            // pass
+                        }
                     }
                     else if (goal.type == "eternal")
                     {
-                        Reward aReward = new Reward(goal.reward.name, goal.reward.description, goal.reward.point, goal.reward.isEarned, goal.reward.isComplete);
                         EternalGoal aGoal = new EternalGoal(goal.name, goal.description, goal.point);
+                        try
+                        {
+                            Reward aReward = new Reward(goal.reward.name, goal.reward.description, goal.reward.point, goal.reward.isEarned, goal.reward.isComplete);
+                            aGoal.SetReward(aReward);
+                        }
+                        catch (System.NullReferenceException)
+                        {
+                            // pass
+                        }
                         _goals.Add(aGoal);
                     }
                     else
                     {
-                        Reward aReward = new Reward(goal.reward.name, goal.reward.description, goal.reward.point, goal.reward.isEarned, goal.reward.isComplete);
-                        Reward aBonusReward = new Reward(goal.bonusReward.name, goal.bonusReward.description, goal.bonusReward.point, goal.bonusReward.isEarned, goal.bonusReward.isComplete);
-                        ChecklistGoal aGoal = new ChecklistGoal(goal.name, goal.description, goal.point, goal.isComplete, goal.target, goal.amountCompleted, goal.bonus, aReward, aBonusReward);
+                        ChecklistGoal aGoal = new ChecklistGoal(goal.name, goal.description, goal.point, goal.isComplete, goal.target, goal.amountCompleted, goal.bonus);
+                        try
+                        {
+                            Reward aReward = new Reward(goal.reward.name, goal.reward.description, goal.reward.point, goal.reward.isEarned, goal.reward.isComplete);
+                            aGoal.SetReward(aReward);
+                        }
+                        catch (System.NullReferenceException)
+                        {
+                            // pass
+                        }
+                        try
+                        {
+                            Reward aBonusReward = new Reward(goal.bonusReward.name, goal.bonusReward.description, goal.bonusReward.point, goal.bonusReward.isEarned, goal.bonusReward.isComplete);
+                            aGoal.SetBonusReward(aBonusReward);
+                        }
+                        catch (System.NullReferenceException)
+                        {
+                            // pass
+                        }
+                        // add goal
                         _goals.Add(aGoal);
                     }
                 }
                 // load pointReward list
                 foreach (AReward pointReward in item.pointReward)
                 {
-                    PointReward aPointReward = new PointReward(pointReward.name, pointReward.description, pointReward.point, pointReward.isEarned, pointReward.isComplete);
-                    _pointRewards.Add(aPointReward);
+                    try
+                    {
+                        PointReward aPointReward = new PointReward(pointReward.name, pointReward.description, pointReward.point, pointReward.isEarned, pointReward.isComplete);
+                        _pointRewards.Add(aPointReward);
+                    }
+                    catch (System.NullReferenceException)
+                    {
+                        // pass
+                    }
                 }
                 // add score
                 _score = item.score;
@@ -779,6 +838,62 @@ public class GoalManager
 
 
         // var jsonValue = JsonNode.Parse(filePath);  // for future use
+    }
+
+    int TotalInCompleteReward()
+    {
+        // calculate the total incomplete rewards and return the value
+        int totalReward = 0;
+
+        // check point reward list
+        if (_pointRewards.Count() > 0)
+        {
+            // loop through goal and check if there is a reward set to a goal
+            foreach (Reward reward in _pointRewards)
+            {
+                if (reward != null)
+                {
+                    // check if the reward is not completed and has been earned
+                    if (!reward.IsComplete() && reward.IsEarned())
+                    {
+                        // increment total reward
+                        totalReward++;
+                    }
+                }
+            }
+        }
+
+        // check goal reward list
+        if (_goals.Count() > 0)
+        {
+            // loop through goal and check if there is a reward set to a goal
+            foreach (Goal goal in _goals)
+            {
+                if (goal.GetReward() != null)
+                {
+                    // check if the reward is not completed and has been earned
+                    if (!goal.GetReward().IsComplete() && goal.GetReward().IsEarned())
+                    {
+                        totalReward++;
+                    }
+                }
+            }
+
+            // loop through goal and check if there is a reward set to a goal
+            foreach (Goal goal in _goals)
+            {
+                if (goal.GetBonusReward() != null)
+                {
+                    // check if the reward is not completed and has been earned
+                    if (!goal.GetBonusReward().IsComplete() && goal.GetBonusReward().IsEarned())
+                    {
+                        totalReward++;
+                    }
+                }
+            }
+        }
+
+        return totalReward;
     }
 
     public void Reward()
@@ -1001,113 +1116,6 @@ public class GoalManager
             return totalReward;
         }
 
-        int TotalInCompleteReward()
-        {
-            // calculate the total incomplete rewards and return the value
-            int totalReward = 0;
-
-            if (_pointRewards.Count() > 0)
-            {
-                // loop through goal and check if there is a reward set to a goal
-                bool foundReward = false;
-                foreach (Reward reward in _pointRewards)
-                {
-                    if (reward != null)
-                    {
-                        if (!reward.IsComplete() && reward.IsEarned())
-                        {
-                            foundReward = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (foundReward)
-                {
-                    int sn = 0;
-                    foreach (Reward reward in _pointRewards)
-                    {
-                        if (reward != null)
-                        {
-                            if (!reward.IsComplete() && reward.IsEarned())
-                            {
-                                sn++;
-                                totalReward += sn;
-                            }
-                        }
-                    }
-                }
-            }
-
-            // List goal rewards
-            if (_goals.Count() > 0)
-            {
-                // loop through goal and check if there is a reward set to a goal
-                bool foundReward = false;
-                foreach (Goal goal in _goals)
-                {
-                    if (goal.GetReward() != null)
-                    {
-                        if (!goal.GetReward().IsComplete() && goal.GetReward().IsEarned())
-                        {
-                            foundReward = true;
-                            break;
-                        }
-                    }
-                }
-                // display goal reward
-                // Console.WriteLine("\nNORMAL GOAL REWARD: ");  // for testing purpose;
-                if (foundReward)
-                {
-                    int sn = 0;
-                    foreach (Goal goal in _goals)
-                    {
-                        if (goal.GetReward() != null)
-                        {
-                            if (!goal.GetReward().IsComplete() && goal.GetReward().IsEarned())
-                            {
-                                sn++;
-                                totalReward += sn;
-                            }
-                        }
-                    }
-                }
-
-                // loop through goal and check if there is a reward set to a goal
-                bool foundBonusReward = false;
-                foreach (Goal goal in _goals)
-                {
-                    if (goal.GetBonusReward() != null)
-                    {
-                        if (!goal.GetBonusReward().IsComplete() && goal.GetBonusReward().IsEarned())
-                        {
-                            foundBonusReward = true;
-                            break;
-                        }
-                    }
-                }
-                // display goal bonus reward
-                // Console.WriteLine("BONUS GOAL REWARD: ");  // for testing purpose
-                if (foundBonusReward)
-                {
-                    int sn = 0;
-                    foreach (Goal goal in _goals)
-                    {
-                        if (goal.GetBonusReward() != null)
-                        {
-                            if (!goal.GetBonusReward().IsComplete() && goal.GetBonusReward().IsEarned())
-                            {
-                                sn++;
-                                totalReward += sn;
-                            }
-                        }
-                    }
-                }
-            }
-
-            return totalReward;
-        }
-
         // Select Reward options
         int rewardChoice = 0;
         while (true)
@@ -1295,6 +1303,12 @@ public class GoalManager
                                         Console.WriteLine("_______________________________________\n");
                                         isNumber = false;
                                     }
+                                    catch (System.ArgumentOutOfRangeException)
+                                    {
+                                        Console.WriteLine("\n_______________________________________");
+                                        Console.WriteLine("Invalid Choice: Please choose from the available options above");
+                                        Console.WriteLine("_______________________________________\n");
+                                    }
                                     catch (Exception error)
                                     {
                                         Console.WriteLine("\n_______________________________________");
@@ -1370,6 +1384,12 @@ public class GoalManager
                                         Console.WriteLine("_______________________________________\n");
                                         isNumber = false;
                                     }
+                                    catch (System.ArgumentOutOfRangeException)
+                                    {
+                                        Console.WriteLine("\n_______________________________________");
+                                        Console.WriteLine("Invalid Choice: Please choose from the available options above");
+                                        Console.WriteLine("_______________________________________\n");
+                                    }
                                     catch (Exception error)
                                     {
                                         Console.WriteLine("\n_______________________________________");
@@ -1444,6 +1464,12 @@ public class GoalManager
                                         Console.WriteLine("Invalid Choice: Numbers only. Please choose from the available options above");
                                         Console.WriteLine("_______________________________________\n");
                                         isNumber = false;
+                                    }
+                                    catch (System.ArgumentOutOfRangeException)
+                                    {
+                                        Console.WriteLine("\n_______________________________________");
+                                        Console.WriteLine("Invalid Choice: Please choose from the available options above");
+                                        Console.WriteLine("_______________________________________\n");
                                     }
                                     catch (Exception error)
                                     {

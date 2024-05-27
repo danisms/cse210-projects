@@ -134,10 +134,31 @@ public class ChecklistGoal : Goal
         string target = "\"target\"" + ":" + $"{_target}";
         string amountCompleted = "\"amountCompleted\"" + ":" + $"{_amountCompleted}";
         string bonus = "\"bonus\"" + ":" + $"{_bonus}";
-        string getReward = "\"reward\"" + ":" + $"{GetReward().GetStringRepresentation()}";
-        string getBonusReward = "\"bonusReward\"" + ":" + $"{GetBonusReward().GetStringRepresentation()}";
 
-        string values = "\t\t{\n" + $"\t\t\t{name},\n\t\t\t{type},\n\t\t\t{description},\n\t\t\t{point},\n\t\t\t{isComplete},\n\t\t\t{target},\n\t\t\t{amountCompleted},\n\t\t\t{bonus}, \n\t\t\t{getReward}, \n\t\t\t{getBonusReward}" + "\n\t\t}";
+        string values;
+        if (GetReward() != null && GetBonusReward() != null)
+        {
+            string getReward = "\"reward\"" + ":" + $"{GetReward().GetStringRepresentation()}";
+            string getBonusReward = "\"bonusReward\"" + ":" + $"{GetBonusReward().GetStringRepresentation()}";
+
+            values = "\t\t{\n" + $"\t\t\t{name},\n\t\t\t{type},\n\t\t\t{description},\n\t\t\t{point},\n\t\t\t{isComplete},\n\t\t\t{target},\n\t\t\t{amountCompleted},\n\t\t\t{bonus}, \n\t\t\t{getReward}, \n\t\t\t{getBonusReward}" + "\n\t\t}";
+        }
+        else if (GetReward() == null && GetBonusReward() != null)
+        {
+            string getBonusReward = "\"bonusReward\"" + ":" + $"{GetBonusReward().GetStringRepresentation()}";
+
+            values = "\t\t{\n" + $"\t\t\t{name},\n\t\t\t{type},\n\t\t\t{description},\n\t\t\t{point},\n\t\t\t{isComplete},\n\t\t\t{target},\n\t\t\t{amountCompleted},\n\t\t\t{bonus}, \n\t\t\t{getBonusReward}" + "\n\t\t}";
+        }
+        else if (GetReward() != null && GetBonusReward() == null)
+        {
+            string getReward = "\"reward\"" + ":" + $"{GetReward().GetStringRepresentation()}";
+
+            values = "\t\t{\n" + $"\t\t\t{name},\n\t\t\t{type},\n\t\t\t{description},\n\t\t\t{point},\n\t\t\t{isComplete},\n\t\t\t{target},\n\t\t\t{amountCompleted},\n\t\t\t{bonus}, \n\t\t\t{getReward}" + "\n\t\t}";
+        }
+        else
+        {
+            values = "\t\t{\n" + $"\t\t\t{name},\n\t\t\t{type},\n\t\t\t{description},\n\t\t\t{point},\n\t\t\t{isComplete},\n\t\t\t{target},\n\t\t\t{amountCompleted},\n\t\t\t{bonus}" + "\n\t\t}";
+        }
         return values;
     }
 }

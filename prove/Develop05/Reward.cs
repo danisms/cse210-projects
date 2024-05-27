@@ -120,7 +120,7 @@ public class Reward
         string isEarned = "\"isEarned\"" + ":" + $"{IsEarned().ToString().ToLower()}";
         string isComplete = "\"isComplete\"" + ":" + $"{IsComplete().ToString().ToLower()}";
 
-        string values = "\t\t\t{\n" + $"\t\t\t\t{name},\n\t\t\t\t{type},\n\t\t\t\t{description},\n\t\t\t\t{point},\n\t\t\t\t{isEarned},\n\t\t\t\t{isComplete}" + "\n\t\t\t}";
+        string values = "{\n" + $"\t\t\t\t{name},\n\t\t\t\t{type},\n\t\t\t\t{description},\n\t\t\t\t{point},\n\t\t\t\t{isEarned},\n\t\t\t\t{isComplete}" + "\n\t\t\t}";
         return values;
     }
 }

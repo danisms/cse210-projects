@@ -6,7 +6,7 @@
 			"description":"complete eternal quest activity",
 			"point":20,
 			"isComplete":true, 
-			"reward":			{
+			"reward":{
 				"name":"complete assignment",
 				"type":"reward",
 				"description":"get a cool drink to relax",
@@ -21,12 +21,12 @@
 			"description":"study the Book of Mormon daily",
 			"point":15,
 			"isComplete":false, 
-			"reward":			{
+			"reward":{
 				"name":"study BOM",
 				"type":"reward",
 				"description":"give yourself a pat the back",
 				"point":0,
-				"isEarned":false,
+				"isEarned":true,
 				"isComplete":false
 			}
 		},
@@ -35,24 +35,24 @@
 			"type":"checklist",
 			"description":"go on several dates on the month of June",
 			"point":15,
-			"isComplete":false,
+			"isComplete":true,
 			"target":3,
-			"amountCompleted":0,
+			"amountCompleted":3,
 			"bonus":250, 
-			"reward":			{
+			"reward":{
 				"name":"go on dates",
 				"type":"reward",
 				"description":"have a great jump as a high five to yourself",
 				"point":0,
-				"isEarned":false,
+				"isEarned":true,
 				"isComplete":false
 			}, 
-			"bonusReward":			{
+			"bonusReward":{
 				"name":"go on dates",
 				"type":"reward",
 				"description":"watch an awesome movie",
 				"point":0,
-				"isEarned":false,
+				"isEarned":true,
 				"isComplete":false
 			}
 		}
@@ -73,7 +73,15 @@
 			"point":200,
 			"isEarned":true,
 			"isComplete":false
+		},
+		{
+			"name":"watch a movie",
+			"type":"pointReward",
+			"description":"watch a movie and enjoy the moments",
+			"point":350,
+			"isEarned":true,
+			"isComplete":false
 		}
 	],
-	"score" : 20
+	"score" : 360
 }

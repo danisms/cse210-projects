@@ -59,9 +59,16 @@ public class SimpleGoal : Goal
         string description = "\"description\"" + ":" + $"\"{GetGoalDescription()}\"";
         string point = "\"point\"" + ":" + $"{_points}";
         string isComplete = "\"isComplete\"" + ":" + $"{IsComplete().ToString().ToLower()}";
-        string getReward = "\"reward\"" + ":" + $"{GetReward().GetStringRepresentation()}";
-
-        string values = "\t\t{\n" + $"\t\t\t{name},\n\t\t\t{type},\n\t\t\t{description},\n\t\t\t{point},\n\t\t\t{isComplete}, \n\t\t\t{getReward}" + "\n\t\t}";
+        string values;
+        if (GetReward() != null)
+        {
+            string getReward = "\"reward\"" + ":" + $"{GetReward().GetStringRepresentation()}";
+            values = "\t\t{\n" + $"\t\t\t{name},\n\t\t\t{type},\n\t\t\t{description},\n\t\t\t{point},\n\t\t\t{isComplete}, \n\t\t\t{getReward}" + "\n\t\t}";
+        }
+        else
+        {
+            values = "\t\t{\n" + $"\t\t\t{name},\n\t\t\t{type},\n\t\t\t{description},\n\t\t\t{point},\n\t\t\t{isComplete}" + "\n\t\t}";
+        }
         return values;
     }
 }
