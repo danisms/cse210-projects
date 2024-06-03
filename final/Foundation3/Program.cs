@@ -74,7 +74,7 @@ class Program
         ikpokpanStakePicnic.DisplayShortDescription();
         Console.WriteLine();  // for spacing purpose
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("Full Description");
+        Console.WriteLine("Full Details");
         Console.ForegroundColor = ConsoleColor.Green;
         ikpokpanStakePicnic.DisplayFullDetails();
         Console.WriteLine();  // for spacing purpose
