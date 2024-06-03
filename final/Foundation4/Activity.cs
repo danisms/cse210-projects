@@ -43,16 +43,16 @@ public abstract class Activity
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Distance: ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"{Distance():C2} km");
+        Console.WriteLine($"{Distance()} km");
         // Speed
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Speed: ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"{Speed():C2} k/h");
+        Console.WriteLine($"{Speed()} k/h");
         // Pace
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Pace: ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"{Pace():C2} min/km");
+        Console.WriteLine($"{Pace()} min/km");
     }
 }
