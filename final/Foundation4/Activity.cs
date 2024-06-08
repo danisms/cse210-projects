@@ -1,7 +1,7 @@
 public abstract class Activity
 {
     protected string _type;
-    private string _date;
+    protected string _date;
     protected double _length;
 
     // Constructor
@@ -43,16 +43,16 @@ public abstract class Activity
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Distance: ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"{Distance()} km");
+        Console.WriteLine($"{Math.Round(Distance(), 2)} km");
         // Speed
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Speed: ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"{Speed()} k/h");
+        Console.WriteLine($"{Math.Round(Speed(), 2)} k/h");
         // Pace
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Pace: ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"{Pace()} min/km");
+        Console.WriteLine($"{Math.Round(Pace(), 2)} min/km");
     }
 }

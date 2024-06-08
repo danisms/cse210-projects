@@ -15,7 +15,7 @@ class Program
         RunningActivity danielRun = new RunningActivity("04 June 2024", 30, 4.8);
         allActivities.Add(danielRun);
         // create a cycling activity
-        CyclingActivity danielCycling = new CyclingActivity("06 July 2024", 30, 9.7);
+        CyclingActivity danielCycling = new CyclingActivity("06 July 2024", 30, 9.6);
         allActivities.Add(danielCycling);
         // create a swimming activity
         SwimmingActivity danielSwimming = new SwimmingActivity("10 August 2024", 30, 96);
