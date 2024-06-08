@@ -49,7 +49,14 @@ public class SwimmingActivity : Activity
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Lap: ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"{_laps}");
+        if (_laps > 1)
+        {
+            Console.WriteLine($"{_laps} laps");
+        }
+        else
+        {
+            Console.WriteLine($"{_laps} lap");
+        }
         // Distance
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Distance: ");
